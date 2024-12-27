@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"   # If you have a build step, else leave this as is
+  publish = "public"          # Directory to publish, usually 'public' for static or 'dist' for build output
+
+[[redirects]]
+  from = "/generate-report"
+  to = "/.netlify/functions/generate-report"
+  status = 200
+  force = true
+
+[[plugins]]
+  package = "@netlify/plugin-functions"
