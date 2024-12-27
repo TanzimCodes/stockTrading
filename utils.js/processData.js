@@ -1,4 +1,4 @@
-const { getStockData } = require('./data');
+const { getStockData } = require('../data');
 
 // Calculate the 20-day moving average of volume
 function calculateMovingAverage(data, period) {

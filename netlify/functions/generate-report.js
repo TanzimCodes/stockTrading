@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const { findBreakoutDays } = require('./utils'); // Assuming your logic for breakout day calculation is in utils.js
-const { writeCSV } = require('./utils'); // Assuming CSV writing logic is in utils.js
+const { findBreakoutDays } = require('../../utils.js/processData');
+const { writeCSV } = require('../../utils.js/csvGenerator');
 
 exports.handler = async (event, context) => {
   // Ensure it's a POST request

@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
-const { findBreakoutDays } = require('./processData');
-const { writeCSV } = require('./csvGenerator');
+const { findBreakoutDays } = require('./utils.js/processData');
+const { writeCSV } = require('./utils.js/csvGenerator');
 const app = express();
 const port = 3000;
 
