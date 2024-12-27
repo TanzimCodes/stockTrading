@@ -1,42 +1,32 @@
-const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-const path = require('path');
+const { createObjectCsvWriter } = require('csv-writer'); // Import csv-writer
+const { Parser } = require('json2csv');  // Import json2csv library for converting data to CSV
 
-// Helper function to format price by removing commas
-// Function to format price to a string with commas and a dollar sign
+// Helper function to format price by adding commas and dollar sign
 function formatPrice(price) {
     if (price === undefined || price === null) {
         return 'N/A'; // Return 'N/A' if the price is undefined or null
     }
-    // Ensure price is a valid number before applying formatting
-    return '$' + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-
+    return '$' + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');  // Format the price with a dollar sign and commas
 }
 
+// Function to generate CSV data (in-memory) and return it as a string
 async function writeCSV(data) {
-  const csvWriter = createCsvWriter({
-    path: path.join(__dirname, 'breakout-report.csv'),
-    header: [
-      { id: 'buyDate', title: 'Buy Date' },
-      { id: 'buyPrice', title: 'Buy Price' },
-      { id: 'sellDate', title: 'Sell Date' },
-      { id: 'sellPrice', title: 'Sell Price' },
-      { id: 'returnPercentage', title: 'Return (%)' },
-    ]
-  });
+    // Map the data to ensure proper format for price and return
+    const mappedData = data.map(row => ({
+        buyDate: row.buyDate,
+        buyPrice: row.buyPrice !== undefined ? formatPrice(row.buyPrice) : 'N/A',
+        sellDate: row.sellDate,
+        sellPrice: row.sellPrice !== undefined ? formatPrice(row.sellPrice) : 'N/A',
+        returnPercentage: row.returnPercentage !== undefined ? row.returnPercentage.toFixed(2) : 'N/A',
+    }));
 
-  // Map the data and ensure proper format for price and return
-  const mappedData = data.map(row => ({
-    buyDate: row.buyDate,
-    buyPrice: row.buyPrice !== undefined ? formatPrice(row.buyPrice) : 'N/A',  // Ensure valid data
-    sellDate: row.sellDate,
-    sellPrice: row.sellPrice !== undefined ? formatPrice(row.sellPrice) : 'N/A',
-    returnPercentage: row.returnPercentage !== undefined ? row.returnPercentage.toFixed(2) : 'N/A',
-  }));
+    // Use json2csv to convert the mapped data into CSV format in memory
+    const parser = new Parser();
+    const csv = parser.parse(mappedData);
 
-  // Write to CSV
-  await csvWriter.writeRecords(mappedData);
-  console.log('CSV file successfully written!');
-  return 'breakout-report.csv';  // Return the CSV file path
+    // Return the CSV data as a string (it will be sent as a response)
+    console.log('CSV file generated successfully in memory!');
+    return csv;
 }
 
 module.exports = { writeCSV };

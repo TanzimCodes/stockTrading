@@ -50,7 +50,7 @@ async function findBreakoutDays(symbol, startDate, endDate, volumeThreshold, pri
 
             // If we don't have enough data for both buy and sell, skip
             if (!data[buyIndex] || !data[sellIndex]) {
-                console.log(`Not enough data to process breakout for ${buyDate}. Skipping.`);
+                // console.log(`Not enough data to process breakout for ${buyDate}. Skipping.`);
                 return; // Skip this iteration if there's not enough data
             }
 
@@ -70,7 +70,6 @@ async function findBreakoutDays(symbol, startDate, endDate, volumeThreshold, pri
         }
     });
 
-    console.log('Breakout days identified:', breakoutDays);
     return breakoutDays;
 }
 
