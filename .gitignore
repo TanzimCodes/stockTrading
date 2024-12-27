@@ -33,3 +33,6 @@ build/
 # Operating system files (optional, but good to include for cross-platform compatibility)
 *.swp           # Swap files for editors like vim
 *.swo           # Swap files for editors like vim
+
+# Local Netlify folder
+.netlify
