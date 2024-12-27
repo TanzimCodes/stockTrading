@@ -114,7 +114,7 @@
         holdingPeriod: holdingPeriod
       };
 
-      fetch('https://stellular-tartufo-096682.netlify.app/generate-report', {
+      fetch('https://stellular-tartufo-096682.netlify.app/.netlify/functions/generate-report', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
