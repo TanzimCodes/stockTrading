@@ -1,0 +1,35 @@
+# Node.js dependencies
+/node_modules/
+
+# Logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Environment variables (if using .env files)
+.env
+
+# OS-specific files
+.DS_Store        # macOS
+Thumbs.db        # Windows
+
+# IDE files
+.vscode/          # VS Code settings
+.idea/            # JetBrains IDEs
+*.sublime-workspace
+*.sublime-project
+
+# Build output
+/dist/
+build/
+
+# Temporary files
+*.log
+*.bak
+
+# Generated CSV reports (if you don't want them in the repository)
+*.csv
+
+# Operating system files (optional, but good to include for cross-platform compatibility)
+*.swp           # Swap files for editors like vim
+*.swo           # Swap files for editors like vim
